@@ -14,22 +14,22 @@ public class SubarraySumEqualsK {
     }
 
     public static int subarraySum(int[] nums, int k) {
-        int[] sums = new int[nums.length+1];
-        sums[0]=0;
-        for (int i = 1; i < sums.length; i++) {
-            sums[i]=sums[i-1]+nums[i-1];
-        }
+//        int[] sums = new int[nums.length+1];
+//        sums[0]=0;
+//        for (int i = 1; i < sums.length; i++) {
+//            sums[i]=sums[i-1]+nums[i-1];
+//        }
         HashMap<Integer, Integer> map = new HashMap<>();
         map.put(0,1);
 
-        int res=0;
-        for (int i = 1; i < sums.length; i++) {
-            int aim=sums[i]-k;
-            if(map.get(aim)!=null){
-                int tmp = map.get(aim);
-                res+=tmp;
+        int res=0,sums=0;
+        for (int num : nums) {
+            sums += num;
+            int aim = sums - k;
+            if (map.containsKey(aim)) {
+                res += map.get(aim);
             }
-            map.put(sums[i],map.getOrDefault(sums[i],0)+1);
+            map.put(sums, map.getOrDefault(sums, 0) + 1);
         }
         return res;
     }
