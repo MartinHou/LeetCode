@@ -9,12 +9,12 @@ public class ThreeSum {
         for (int i=0;i<strs.length;++i){
             input[i] = Integer.parseInt(strs[i]);
         }
-        List<List<Integer>> res = solution(input);
+        List<List<Integer>> res = threeSum(input);
         System.out.println(res);
 
     }
 
-    public static List<List<Integer>> solution(int[] nums){
+    public static List<List<Integer>> threeSum(int[] nums){
         Arrays.sort(nums);
         Set<List<Integer>> res = new HashSet<>();
         for(int i=0;i<nums.length-2;++i){
