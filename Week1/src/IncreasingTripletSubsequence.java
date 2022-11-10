@@ -15,21 +15,12 @@ public class IncreasingTripletSubsequence {
     }
 
     public static boolean increasingTriplet(int[] nums) {
-        int n=nums.length;
-        int[] min = new int[n];
-        int[] max = new int[n];
-        int cur_min=Integer.MAX_VALUE;
-        for (int i = 0; i < n; i++) {
-            cur_min = Math.min(cur_min, nums[i]);
-            min[i]=cur_min;
-        }
-        int cur_max=Integer.MIN_VALUE;
-        for (int i = n-1; i >= 0 ; i--) {
-            cur_max = Math.max(cur_max, nums[i]);
-            max[i]=cur_max;
-        }
-        for (int i = 1; i < n-1; i++) {
-            if(min[i]!=nums[i]&&max[i]!=nums[i])return true;
+        int max1 = Integer.MAX_VALUE;
+        int max2 = Integer.MAX_VALUE;
+        for(int n : nums) {
+            if(n <= max1) max1 = n;
+            else if(n <= max2) max2 = n;
+            else return true;
         }
         return false;
     }
