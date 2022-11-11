@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Stack;
 
 public class TrappingRainWater {
     public static void main(String[] args) {
@@ -12,18 +13,15 @@ public class TrappingRainWater {
     }
 
     public static int trap(int[] height) {
-        int res=0,lastNoneZero=-2;
-        while(lastNoneZero!=-1){
-            lastNoneZero=-1;
-            for (int i = 0; i < height.length; i++) {
-                if(height[i]!=0){
-                    if(lastNoneZero==-1)lastNoneZero=i;
-                    else{
-                        res+=i-lastNoneZero-1;
-                        lastNoneZero=i;
-                    }
-                    height[i]--;
-                }
+        Stack<Integer> stk = new Stack<>();
+        int res=0,i=0;
+        while(i<height.length){
+            if(stk.isEmpty()||height[i]<height[stk.peek()]){
+                stk.push(i++);
+            }else{
+                int bot=stk.pop();
+                int vol = stk.isEmpty()?0:(Math.min(height[stk.peek()],height[i])-height[bot])*(i-stk.peek()-1);
+                res+=vol;
             }
         }
         return res;
